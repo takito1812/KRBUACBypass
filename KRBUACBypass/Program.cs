@@ -52,7 +52,7 @@ namespace KRBUACBypass
         {
             string method = args[0];
             string command = options.Command;
-            Verbose = options.Verbose;
+            options.Verbose = true;
 
             string domainController = Networking.GetDCName();
             string service = $"HOST/{Dns.GetHostName()}";
