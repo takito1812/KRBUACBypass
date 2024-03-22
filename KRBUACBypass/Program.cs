@@ -9,11 +9,8 @@ namespace KRBUACBypass
 {
     public class Options
     {
-        [Option('c', "Command", Required = false, HelpText = "Program to run.")]
-        public string Command { get; set; }
-
         [Option('v', "Verbose", Required = false, HelpText = "Output verbose debug information.")]
-        public bool Verbose { get; set; }
+        public bool Verbose { get; set; } = true;
     }
 
     internal class Program
@@ -24,14 +21,11 @@ namespace KRBUACBypass
         public static bool BogusMachineID = true;
         static void Main(string[] args)
         {
-            var ParserResult = new CommandLine.Parser(with => with.HelpWriter = null)
+            var ParserResult = new Parser(with => with.HelpWriter = null)
                 .ParseArguments<Options>(args);
-            if (args.Length == 0)
-            {
-                return;
-            }
+            
             ParserResult
-                .WithParsed(options => Run(args, options))
+                .WithParsed(options => Run(options))
                 .WithNotParsed(errs => DisplayHelp(ParserResult));
         }
 
@@ -50,9 +44,7 @@ namespace KRBUACBypass
 
         private static void Run(string[] args, Options options)
         {
-            string method = args[0];
-            string command = options.Command;
-            options.Verbose = true;
+            Verbose = options.Verbose;
 
             string domainController = Networking.GetDCName();
             string service = $"HOST/{Dns.GetHostName()}";
