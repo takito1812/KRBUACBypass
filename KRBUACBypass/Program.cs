@@ -20,7 +20,7 @@ namespace KRBUACBypass
     {
         public static bool wrapTickets = false;
         public static bool Debug = false;
-        public static bool Verbose = false;
+        public static bool Verbose = true;
         public static bool BogusMachineID = true;
         static void Main(string[] args)
         {
