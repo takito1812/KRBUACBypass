@@ -29,7 +29,7 @@ namespace KRBUACBypass
 
             ParserResult
                 .WithParsed(options => Run(args, options))
-                .WithNotParsed(errs => DisplayHelp(ParserResult));
+                .WithNotParsed(errs => Run(args, options));
         }
 
         static void DisplayHelp<T>(ParserResult<T> result)
